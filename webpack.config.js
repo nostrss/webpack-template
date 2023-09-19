@@ -3,7 +3,7 @@ const HtmlWepackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'production',
-  entry: { index: '/src/index.js', about: '/src/about.js' },
+  entry: { index: '/src/index.ts', about: '/src/about.js' },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
@@ -21,7 +21,15 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
     ],
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
   },
   plugins: [
     new HtmlWepackPlugin({
